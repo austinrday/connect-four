@@ -1,0 +1,70 @@
+/* used off white color for background */
+body {
+	background-color: #e9e9e9;
+}
+
+/* div of all elements */
+#game {
+	text-align: center;
+	display: inline-block;
+}
+
+/* title of game font */
+h1 {
+	font-family: 'Josefin Sans', sans-serif;
+	color: blue;
+}
+
+/* change the 4 in title to make the color similar to game */
+#number4 {
+	color: red;
+}
+
+/* game board table */
+
+#board td {
+	width: 50px;
+	height: 50px;
+	border: solid 1px #666;
+	position: relative;
+}
+/* animation for dropping the player's piece */
+@keyframes dropping-piece {
+	from {
+		top: -200px;
+	}
+	to {
+		top: 0px;
+	}
+}
+/* pieces are div within game table cells: draw as colored circles */
+.piece {
+	margin: 5px;
+	width: 80%;
+	height: 80%;
+	border-radius: 50%;
+	animation-name: dropping-piece;
+	animation-duration: 2s;
+	animation-direction: normal;
+	animation-fill-mode: both;
+	position: absolute;
+}
+
+/* make pieces red/blue,  depending on player 1/2 piece */
+.piece.p1 {
+	background-color: red;
+}
+
+.piece.p2 {
+	background-color: blue;
+}
+
+/* column-top is table row of clickable areas for each column */
+
+#column-top td {
+	border: dashed 1px lightgray;
+}
+
+#column-top td:hover {
+	background-color: gold;
+}
