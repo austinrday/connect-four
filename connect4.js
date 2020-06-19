@@ -15,7 +15,7 @@ let board = []; // array of rows, each row is array of cells  (board[y][x])
  *    board = array of rows, each row is array of cells  (board[y][x])
  */
 
-function makeBoard () {
+function makeBoard (){
 	// set "board" to empty HEIGHT x WIDTH matrix array
 	for (let i = 0; i < HEIGHT; i++) {
 		board.push(Array.from({ length: WIDTH }));
@@ -24,7 +24,7 @@ function makeBoard () {
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
-function makeHtmlBoard () {
+function makeHtmlBoard (){
 	// get "htmlBoard" variable from the item in HTML w/ID of "board"
 	const board = document.getElementById('board');
 
@@ -54,7 +54,7 @@ function makeHtmlBoard () {
 
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 
-function findSpotForCol (x) {
+function findSpotForCol (x){
 	// finds the lowest empty spot in the game board, returns the y coordinate (or null if the column is filled).
 	for (let y = HEIGHT - 1; y >= 0; y--) {
 		if (!board[y][x]) {
@@ -66,7 +66,7 @@ function findSpotForCol (x) {
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 
-function placeInTable (y, x) {
+function placeInTable (y, x){
 	// create piece and insert into correct table cell
 	const piece = document.createElement('div');
 	piece.classList.add('piece');
@@ -77,15 +77,18 @@ function placeInTable (y, x) {
 
 /** endGame: announce game end */
 
-function endGame (msg) {
-	// pop up alert message
-	alert(msg);
+function endGame (msg){
+	// pop up delayed alert message to account for animation
+	setTimeout(function (){
+		alert(msg);
+	}, 1000);
 }
 
 /** handleClick: handle click of column top to play piece */
 
-function handleClick (evt) {
+function handleClick (evt){
 	// get x from ID of clicked cell
+	// + converts string to num
 	const x = +evt.target.id;
 
 	// get next spot in column (if none, ignore click)
@@ -113,12 +116,18 @@ function handleClick (evt) {
 	// switch players
 	// switch currPlayer 1 <-> 2
 	currPlayer = currPlayer === 1 ? 2 : 1;
+
+	/** Let users know who's turn it currently is to play */
+	const playerTurn = document.querySelector('h3');
+	playerTurn.innerText = `Player ${currPlayer}'s turn`;
+	// change player turn's h3 color to represent player's turn and color
+	playerTurn.setAttribute('id', `player${currPlayer}`);
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
 
-function checkForWin () {
-	function _win (cells) {
+function checkForWin (){
+	function _win (cells){
 		// Check four cells to see if they're all color of current player
 		//  - cells: list of four (y, x) cells
 		//  - returns true if all are legal coordinates & all match currPlayer
